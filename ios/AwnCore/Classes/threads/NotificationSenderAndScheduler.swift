@@ -119,12 +119,17 @@ public class NotificationSenderAndScheduler {
     private func execute(
         completion: @escaping (Bool, UNMutableNotificationContent?, Error?) -> ()
     ) throws {
-        try self.doInBackground(completion: { notificationReceived in
-            self.onPostExecute(
-                receivedNotification: notificationReceived,
-                completion: completion
-            )
-        })
+        do{
+
+            try self.doInBackground(completion: { notificationReceived in
+                self.onPostExecute(
+                    receivedNotification: notificationReceived,
+                    completion: completion
+                )
+            })
+         } catch {
+            completion(false, nil, error)
+        }
     }
     
     /// AsyncTask METHODS BEGIN *********************************

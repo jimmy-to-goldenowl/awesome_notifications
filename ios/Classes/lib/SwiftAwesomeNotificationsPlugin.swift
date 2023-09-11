@@ -88,7 +88,11 @@ public class SwiftAwesomeNotificationsPlugin:
             flutterChannel?.invokeMethod(eventType, arguments: updatedContent)
         }
         else {
-            flutterChannel?.invokeMethod(eventType, arguments: content)
+            do {
+                flutterChannel?.invokeMethod(eventType, arguments: content)
+            } catch {
+                // SwiftAwesomeNotificationsPlugin.onNewAwesomeEvent(eventType:content)
+            }
         }
     }
     
